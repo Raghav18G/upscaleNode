@@ -1,12 +1,33 @@
 const express = require("express");
 const path = require("path");
+const hbs = require("hbs");
+
 const app = express();
 
+//Paths
 const staticPathName = path.join(__dirname, "../public");
-console.log(staticPathName);
+const viewsPath = path.join(__dirname, "../templates/views");
+const partialsPath = path.join(__dirname, "../templates/partials");
+
+//hbs
+app.set("view engine", "hbs");
+app.set("views", viewsPath);
+hbs.registerPartials(partialsPath);
 
 app.use(express.static(staticPathName));
 
+app.get("", (req, res) => {
+  res.render("index", {
+    title: "Index HBS FILE - Web SERVER",
+    name: "Raghav Goel",
+  });
+});
+
+app.get("/about", (req, res) => {
+  res.render("about", {
+    title: "About HBS FILE - Web SERVER",
+  });
+});
 app.get("/help", (req, res) => {
   res.send("Help Page!.");
 });
