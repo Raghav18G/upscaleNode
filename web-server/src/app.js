@@ -37,9 +37,25 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/weather", (req, res) => {
+  let query = req.query;
+  if (!query.address) {
+    return res.send({
+      error: "Please Provide the Address",
+    });
+  }
+
   res.send({
     name: "Weather Forecst",
     weather: "30 degrees",
+    address: query.address,
+  });
+});
+
+app.get("*", (req, res) => {
+  res.render("404", {
+    title: "404",
+    errorMesage: "Not a Valid Route, Please enter a valid Route",
+    name: "Raghav Goel",
   });
 });
 
