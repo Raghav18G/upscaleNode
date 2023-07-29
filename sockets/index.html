@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jod Web Sockets</title>
+</head>
+<body>
+    <output id="messages"></output>
+    <script>
+        const messages = document.getElementById("mesages");
+        const socket = new WebSocket('ws://localhost:3333');
+        socket.onopen = (event) => console.log("Socket is Connected");
+        socket.onmessage=(msg) => console.log(" I recieved a mesage",msg);
+        socket.onerror=(error)=> conole.error("Web Socket Error",error);
+        socket.onclose = (event) => console.log("Socket Disconneted from the Server")
+    </script>
+</body>
+</html>
